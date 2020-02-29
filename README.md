@@ -34,4 +34,4 @@ $ npm run dev
 
 ## Архитектура
 
-
+![architecture](./docs/architecture.svg)
