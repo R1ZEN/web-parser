@@ -5,9 +5,9 @@ import { compose } from '../compose';
 
 export const initDatabase = compose(
   async function connect(): Promise<{instance: Db, disconnect: () => Promise<any>}> {
-    let {PROD, DB_URL = '', DB_NAME = ''} = process.env;
+    let {DB_URL = '', DB_NAME = ''} = process.env;
 
-    if (PROD) {
+    if (process.env.NODE_ENV === "production") {
       DB_URL = DB_URL.replace('username', process.env.ATLAS_MONGODB_USER);
       DB_URL = DB_URL.replace('password', process.env.ATLAS_MONGODB_PASSWORD);
     }
