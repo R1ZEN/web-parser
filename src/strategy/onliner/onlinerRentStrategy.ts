@@ -35,7 +35,7 @@ function getApartmentsPage(page: number): Promise<IOnlinerApartments> {
   });
 }
 
-const EXPIRE_DAYS_IN_SECONDS = 3*24*60*60;
+const EXPIRE_DAYS_IN_SECONDS = 7*24*60*60;
 
 async function initOnlinerCollection(context: IContext): Promise<{collection: Collection}> {
   let {db, colName} = context;

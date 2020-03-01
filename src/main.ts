@@ -6,7 +6,6 @@ import { transportDatasetStrategy } from './strategy/transport/transportDatasetS
 import { startCronJob } from './cronJob';
 import { initServer } from './server';
 
-
 export const main = withLogger(
   async function main() {
     let db = await initDatabase();
