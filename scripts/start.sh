@@ -1,3 +1,5 @@
 #!/bin/bash
 
-if [ -d "$PWD/dist" ]; then node -r $PWD/dist/index.js; fi
+if [ -d "$PWD/dist" ];
+  then node -r dotenv/config $PWD/dist/index.js dotenv_config_path=$PWD/.env.prod;
+fi
