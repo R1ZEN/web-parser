@@ -1,12 +1,30 @@
 import { CronJob } from 'cron';
+import { logApp, withLogger } from './logger/withLogger';
 
-export function startCronJob(callback: () => void): CronJob {
-  let job = new CronJob(
-    '* 1 * * * *',
-    callback,
-  );
+export const startCronJob = withLogger(
+  function startCronJob(callback: () => unknown): CronJob {
+    let logNextUpdate = (job: CronJob, message: string = '') => {
+      logApp.info(
+        message + 'Next update on',
+        job.nextDate()
+          .local()
+          .utc()
+          .format()
+        );
+    }
 
-  job.start();
+    let job = new CronJob(
+      process.env.JOB_PLAN || '* * * * * *',
+      (...args) => {
+        logNextUpdate(job)
+        callback(...args);
+      },
+    );
 
-  return job;
-}
+    job.start();
+
+    logNextUpdate(job, 'Start CRON Job.');
+
+    return job;
+  }
+);

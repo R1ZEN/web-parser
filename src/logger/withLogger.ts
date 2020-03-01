@@ -37,7 +37,7 @@ export let logApp = getLogger('app');
 
 type ArrowFunction<A = any, R = any> = (...args: A[]) => R;
 
-export function withLogger<T extends ArrowFunction>(f: T): (...args: Parameters<T>[]) => ReturnType<T>;
+export function withLogger<T extends ArrowFunction>(f: T): (...args: Parameters<T>) => ReturnType<T>;
 
 export function withLogger(f: Function) {
   return (...args: unknown[]) => {
@@ -50,7 +50,7 @@ export function withLogger(f: Function) {
       return result
         .then(res => {
           let perf = Math.floor((performance.now() - nowMark) * 100) / 100;
-          logApp.info(name, 'perf:', perf, 'ms');
+          logApp.info(name, 'perf:', perf + 'ms');
 
           return res;
         })
